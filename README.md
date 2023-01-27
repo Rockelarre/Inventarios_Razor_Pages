@@ -23,6 +23,6 @@ https://www.udemy.com/course/razor-pages-la-guia-inicial/
     - Personalización del nombre de las tablas en la base de datos
     - Habilitación de uso de notificaciones con el paquete AspNetCoreHero.ToastNotification
     - Filtrado por término de búsqueda
-    - Paginación
+    - Paginación de la tabla Marcas
     - Habilitación del uso de vistas parciales
     - Resolución de inconsistencias en Creación/Edición de una Marca
