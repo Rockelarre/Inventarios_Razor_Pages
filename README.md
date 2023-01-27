@@ -6,6 +6,7 @@
     - Razor Pages 
     - Bootstrap 5
     - FontAwesome 6
+    - ToastNotification
 
 Esta es una aplicación web para realizar la gestión de inventario de una tienda , creada a partir del tutorial N°2 del curso: 
 ### "Razor Pages, La Guía Inicial Definitiva con .NET 6+" 
