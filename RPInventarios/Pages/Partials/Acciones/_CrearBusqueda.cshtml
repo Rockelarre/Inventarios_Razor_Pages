@@ -1,0 +1,25 @@
+﻿
+@model CrearBusquedaViewModel
+
+<h1>@ViewData["Title"]</h1>
+<p class="text-end">
+    @Model.TotalRegistros registros
+</p>
+<div class="row mb-3">
+    <div class="col-6">
+        <a class="btn btn-primary" asp-page="Create">
+        <i class="fa-solid fa-plus"></i>&nbsp;@Model.TituloCrear
+    </a>
+    </div>
+    <div class="col-6">
+        <form class="input-group">
+            <input asp-for="TerminoBusqueda" class="form-control" placeholder="Término de Búsqueda" aria-label="Término de Búsqueda"/>
+            <button name="botonBusqueda" id="botonBusqueda" type="submit" class="btn btn-outline-primary">
+                <i class="fa-solid fa-magnifying-glass"></i>&nbsp;Buscar
+            </button>
+            <a asp-page="./Index" class="btn btn-outline-secondary">
+                <i class="fa-solid fa-arrows rotate"></i>&nbsp;Limpiar
+            </a>
+        </form>
+    </div>
+</div>
