@@ -12,7 +12,7 @@ using RPInventarios.Data;
 namespace RPInventarios.Migrations
 {
     [DbContext(typeof(InventariosContext))]
-    [Migration("20230129042144_ModeloInicial")]
+    [Migration("20230129095545_ModeloInicial")]
     partial class ModeloInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,7 +115,7 @@ namespace RPInventarios.Migrations
 
                     b.HasIndex("MarcaId");
 
-                    b.ToTable("Usuario", (string)null);
+                    b.ToTable("Producto", (string)null);
                 });
 
             modelBuilder.Entity("RPInventarios.Models.Usuario", b =>
@@ -156,7 +156,7 @@ namespace RPInventarios.Migrations
 
                     b.HasIndex("PerfilId");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuario", (string)null);
                 });
 
             modelBuilder.Entity("RPInventarios.Models.Producto", b =>

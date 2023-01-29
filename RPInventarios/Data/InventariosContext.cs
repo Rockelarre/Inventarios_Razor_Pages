@@ -16,10 +16,9 @@ public class InventariosContext : DbContext
 
     public DbSet<Marca> Marca { get; set; }
     public DbSet<Departamento> Departamento { get; set; }
-
     public DbSet<Perfil> Perfil { get; set; }
     public DbSet<Producto> Producto { get; set; }
-    public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<Usuario> Usuario { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -27,7 +26,7 @@ public class InventariosContext : DbContext
         modelBuilder.Entity<Departamento>().ToTable("Departamento");
         modelBuilder.Entity<Perfil>().ToTable("Perfil");
         modelBuilder.Entity<Producto>().ToTable("Producto");
-        modelBuilder.Entity<Producto>().ToTable("Usuario");
+        modelBuilder.Entity<Usuario>().ToTable("Usuario");
 
         base.OnModelCreating(modelBuilder);
     }

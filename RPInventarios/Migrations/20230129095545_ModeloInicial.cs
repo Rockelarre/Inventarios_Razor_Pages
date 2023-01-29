@@ -51,7 +51,7 @@ namespace RPInventarios.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Usuario",
+                name: "Producto",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -64,9 +64,9 @@ namespace RPInventarios.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuario", x => x.Id);
+                    table.PrimaryKey("PK_Producto", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Usuario_Marca_MarcaId",
+                        name: "FK_Producto_Marca_MarcaId",
                         column: x => x.MarcaId,
                         principalTable: "Marca",
                         principalColumn: "Id",
@@ -74,7 +74,7 @@ namespace RPInventarios.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Usuarios",
+                name: "Usuario",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -89,9 +89,9 @@ namespace RPInventarios.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuarios", x => x.Id);
+                    table.PrimaryKey("PK_Usuario", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Usuarios_Perfil_PerfilId",
+                        name: "FK_Usuario_Perfil_PerfilId",
                         column: x => x.PerfilId,
                         principalTable: "Perfil",
                         principalColumn: "Id",
@@ -99,13 +99,13 @@ namespace RPInventarios.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Usuario_MarcaId",
-                table: "Usuario",
+                name: "IX_Producto_MarcaId",
+                table: "Producto",
                 column: "MarcaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Usuarios_PerfilId",
-                table: "Usuarios",
+                name: "IX_Usuario_PerfilId",
+                table: "Usuario",
                 column: "PerfilId");
         }
 
@@ -115,10 +115,10 @@ namespace RPInventarios.Migrations
                 name: "Departamento");
 
             migrationBuilder.DropTable(
-                name: "Usuario");
+                name: "Producto");
 
             migrationBuilder.DropTable(
-                name: "Usuarios");
+                name: "Usuario");
 
             migrationBuilder.DropTable(
                 name: "Marca");

@@ -1,0 +1,65 @@
+﻿@page "{id:int?}"
+@model RPInventarios.Pages.Usuarios.EditModel
+
+@{
+    ViewData["Title"] = "Editar Usuario";
+}
+
+<h4>@ViewData["Title"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Usuario.Id" />
+            <div class="form-group">
+                <label asp-for="Usuario.Username" class="control-label"></label>
+                <input asp-for="Usuario.Username" class="form-control" readonly="readonly" />
+                <span asp-validation-for="Usuario.Username" class="text-danger"></span>
+            </div>           
+            <div class="form-group mt-3">
+                <label asp-for="Usuario.PerfilId" class="control-label"></label>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupSelect01">
+                        <i class="fa-solid fa-users"></i>
+                    </label>
+                    <select asp-for="Usuario.PerfilId" class="form-select" asp-items="Model.Perfiles">
+                        <option value="">---Seleccionar Perfil---</option>
+                    </select>
+                </div>
+                <span asp-validation-for="Usuario.PerfilId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Usuario.Nombre" class="control-label"></label>
+                <input asp-for="Usuario.Nombre" class="form-control" />
+                <span asp-validation-for="Usuario.Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Usuario.Apellidos" class="control-label"></label>
+                <input asp-for="Usuario.Apellidos" class="form-control" />
+                <span asp-validation-for="Usuario.Apellidos" class="text-danger"></span>
+            </div>            
+            <div class="form-group">
+                <label asp-for="Usuario.CorreoElectronico" class="control-label"></label>
+                <input asp-for="Usuario.CorreoElectronico" class="form-control" />
+                <span asp-validation-for="Usuario.CorreoElectronico" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Usuario.Celular" class="control-label"></label>
+                <input asp-for="Usuario.Celular" class="form-control" />
+                <span asp-validation-for="Usuario.Celular" class="text-danger"></span>
+            </div>            
+             <div class="form-group mt-3">
+                <partial name="Acciones/_Edit" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
