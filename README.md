@@ -26,3 +26,4 @@ https://www.udemy.com/course/razor-pages-la-guia-inicial/
     - Paginación de la tabla Marcas en pantalla
     - Habilitación del uso de vistas parciales
     - Resolución de inconsistencias en Creación/Edición de una Marca
+    - Migraciones
