@@ -27,3 +27,6 @@ https://www.udemy.com/course/razor-pages-la-guia-inicial/
     - Habilitación del uso de vistas parciales
     - Resolución de inconsistencias en Creación/Edición de una Marca
     - Migraciones
+    - Uso de clase PasswordHasher para encriptación de la contraseña de usuario.
+    - Uso de clase UsuarioFactoria para reducir la complejidad del código escrito en la clase PageModel
+    - Validación del Username con Ajax
