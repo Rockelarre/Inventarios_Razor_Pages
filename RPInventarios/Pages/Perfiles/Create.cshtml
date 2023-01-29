@@ -1,0 +1,29 @@
+﻿@page
+@model RPInventarios.Pages.Perfiles.CreateModel
+
+@{
+    ViewData["Title"] = "Crear Perfil";
+}
+<h4>@ViewData["Title"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Perfil.Nombre" class="control-label"></label>
+                <input asp-for="Perfil.Nombre" class="form-control" />
+                <span asp-validation-for="Perfil.Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <partial name="Acciones/_Create" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

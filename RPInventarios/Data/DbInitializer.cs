@@ -26,11 +26,31 @@ namespace RPInventarios.Data;
 
             var departamentos = new Departamento[]
             {
-                        new Departamento{Nombre="Administración General"},
-                        new Departamento{Nombre="Recursos Humanos"},
-                        new Departamento{Nombre="Recursos Materiales"},
-                        new Departamento{Nombre="Informática"},
-                        new Departamento{Nombre="Deportes"}
+                        new Departamento{
+                            Nombre="Administración General",
+                            Descripcion="Administración General",
+                            FechaCreacion=DateTime.Now
+                        },
+                        new Departamento{
+                            Nombre="Recursos Humanos",
+                            Descripcion="Recursos Humanos",
+                            FechaCreacion=DateTime.Now
+                        },
+                        new Departamento{
+                            Nombre="Recursos Materiales",
+                            Descripcion="Recursos Materiales",
+                            FechaCreacion=DateTime.Now
+                        },
+                        new Departamento{
+                            Nombre="Informática",
+                            Descripcion="Informática",
+                            FechaCreacion=DateTime.Now
+                        },
+                        new Departamento{
+                            Nombre="Deportes",
+                            Descripcion="Deportes",
+                            FechaCreacion=DateTime.Now
+                        }
             };
             context.Departamento.AddRange(departamentos);
             context.SaveChanges();

@@ -1,0 +1,35 @@
+﻿@page "{id:int?}"
+@model RPInventarios.Pages.Departamentos.DetailsModel
+
+@{
+    ViewData["Title"] = "Detalles del departamento";
+}
+
+<h4>@ViewData["Title"]</h4>
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Departamento.Nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Departamento.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Departamento.Descripcion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Departamento.Descripcion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Departamento.FechaCreacion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Departamento.FechaCreacion)
+        </dd>
+    </dl>
+</div>
+<div class="row">
+    <div class="col">
+        <partial name="Acciones/_Details" model="@Model.Departamento.Id" />
+    </div>
+</div>

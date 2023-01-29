@@ -1,0 +1,72 @@
+﻿@page
+@using X.PagedList.Mvc.Core 
+@using X.PagedList.Web.Common
+@model RPInventarios.Pages.Productos.IndexModel
+
+@{
+    ViewData["Title"] = "Productos";
+}
+
+@await Html.PartialAsync("Acciones/_CrearBusqueda",new CrearBusquedaViewModel{
+    TerminoBusqueda = Model.TerminoBusqueda,
+    TituloCrear = "Crear Producto",
+    TotalRegistros = Model.TotalRegistros
+})
+
+<table class="table table-hover table-bordered table-striped">
+    <thead class="bg-primary text-white">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Productos[0].Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Productos[0].Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Productos[0].Marca)
+            </th>
+            <th class="text-end">
+                @Html.DisplayNameFor(model => model.Productos[0].Costo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Productos[0].Estatus)
+            </th>
+           <th class="text-center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Productos)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Marca.Nombre)
+                </td>
+                <td class="text-end">
+                    @*@Html.DisplayFor(modelItem => item.Costo)*@
+                    @String.Format("{0:c}",item.Costo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estatus)
+                </td>
+                 <td class="text-center">
+                   <partial name="Acciones/_Crud" model="item.Id" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.PagedListPager(Model.Productos,page=>Url.Action("Index",new {
+    Pagina = page,
+    TerminoBusqueda=Model.TerminoBusqueda
+}),
+    new PagedListRenderOptions{
+        LiElementClasses = new string[]{"page-item"},
+        PageClasses = new string[]{"page-link"}
+    }
+)

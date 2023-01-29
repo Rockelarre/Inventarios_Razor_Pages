@@ -34,6 +34,7 @@ public class IndexModel : PageModel
         {
             var registrosPorPagina = _configuration.GetValue("RegistrosPorPagina", 3);
             var consulta = _context.Marca
+                                    .AsNoTracking()
                                     .Select(u => u);
 
             if (!String.IsNullOrEmpty(TerminoBusqueda)) 

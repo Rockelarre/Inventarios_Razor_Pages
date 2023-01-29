@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using RPInventarios.Data;
 using RPInventarios.Models;
 
-namespace RPInventarios.Pages.Marcas;
+namespace RPInventarios.Pages.Perfiles;
 
 public class DetailsModel : PageModel
 {
@@ -15,23 +15,22 @@ public class DetailsModel : PageModel
         _context = context;
     }
 
-  public Marca Marca { get; set; }
+    public Perfil Perfil { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id == null || _context.Marca == null)
+        if (id == null)
         {
             return NotFound();
         }
 
-        var marca = await _context.Marca.AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
-        if (marca == null)
+        Perfil = await _context.Perfil
+                            .AsNoTracking()
+                            .FirstOrDefaultAsync(m => m.Id == id);
+
+        if (Perfil == null)
         {
             return NotFound();
-        }
-        else 
-        {
-            Marca = marca;
         }
         return Page();
     }

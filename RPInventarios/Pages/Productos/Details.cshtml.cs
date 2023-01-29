@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using RPInventarios.Data;
 using RPInventarios.Models;
 
-namespace RPInventarios.Pages.Marcas;
+namespace RPInventarios.Pages.Productos;
 
 public class DetailsModel : PageModel
 {
@@ -15,23 +15,23 @@ public class DetailsModel : PageModel
         _context = context;
     }
 
-  public Marca Marca { get; set; }
+    public Producto Producto { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        if (id == null || _context.Marca == null)
+        if (id == null)
         {
             return NotFound();
         }
 
-        var marca = await _context.Marca.AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
-        if (marca == null)
+        Producto = await _context.Producto
+                                    .Include(p => p.Marca)
+                                    .AsNoTracking()
+                                    .FirstOrDefaultAsync(m => m.Id == id);
+
+        if (Producto == null)
         {
             return NotFound();
-        }
-        else 
-        {
-            Marca = marca;
         }
         return Page();
     }
