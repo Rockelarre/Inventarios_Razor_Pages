@@ -4,6 +4,7 @@
     - .Net Core 6.0 
     - C# 
     - Razor Pages 
+    - Local Database (SQL Server)
     - Bootstrap 5
     - FontAwesome 6
     - ToastNotification
