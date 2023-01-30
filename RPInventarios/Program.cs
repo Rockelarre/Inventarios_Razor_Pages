@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,35 @@ using RPInventarios.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizeFolder("/Perfiles","Administradores");
+    options.Conventions.AuthorizeFolder("/Usuarios", "Administradores");
+    options.Conventions.AuthorizeFolder("/Departamentos", "Administradores");
+
+    options.Conventions.AuthorizeFolder("/Marcas", "EmpleadosEmpresa");
+
+    options.Conventions.AuthorizeFolder("/Productos", "Organizacion");
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Administradores", policy => policy.RequireRole("Administrador"));
+    options.AddPolicy("EmpleadosEmpresa", policy => policy.RequireRole("Administrador","Empleado"));
+    options.AddPolicy("Organizacion", policy => policy.RequireRole("Administrador","Empleado","Invitado"));
+
+});
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.Cookie.HttpOnly = true;
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                    options.LoginPath = "/Account/Login";
+                    options.AccessDeniedPath = "/AccesoDenegado";
+                    options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                    options.SlidingExpiration = true;
+                });
 
 builder.Services.Configure<RazorViewEngineOptions>(options =>
 {
@@ -61,6 +90,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
