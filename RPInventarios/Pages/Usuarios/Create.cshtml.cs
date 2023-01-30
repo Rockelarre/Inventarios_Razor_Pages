@@ -25,6 +25,7 @@ public class CreateModel : PageModel
     public IActionResult OnGet()
     {
         Perfiles = new SelectList(_context.Perfil.AsNoTracking(), "Id", "Nombre");
+        Usuario = new UsuarioRegistroViewModel();
         return Page();
     }
 
@@ -53,6 +54,14 @@ public class CreateModel : PageModel
         }
 
         var usuarioAgregar = _usuarioFactoria.CrearUsuario(Usuario);
+
+        if (Request.Form.Files.Count > 0)
+        {
+            IFormFile archivo = Request.Form.Files.FirstOrDefault();
+            using var dataStream = new MemoryStream();
+            await archivo.CopyToAsync(dataStream);
+            usuarioAgregar.Foto = dataStream.ToArray();
+        }
 
         _context.Usuario.Add(usuarioAgregar);
         await _context.SaveChangesAsync();

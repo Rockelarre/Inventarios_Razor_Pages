@@ -40,7 +40,8 @@ public class UsuarioFactoria
             CorreoElectronico = usuario.CorreoElectronico,
             Nombre = usuario.Nombre,
             PerfilId = usuario.PerfilId,
-            Username = usuario.Username
+            Username = usuario.Username,
+            Foto = usuario.Foto
         };
     }
 

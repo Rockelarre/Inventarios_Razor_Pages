@@ -72,6 +72,14 @@ public class EditModel : PageModel
         var usuarioBd = await _context.Usuario.FindAsync(Usuario.Id);
         _usuarioFactoria.ActualizarDatosUsuario(Usuario, usuarioBd);
 
+        if (Request.Form.Files.Count > 0)
+        {
+            IFormFile archivo = Request.Form.Files.FirstOrDefault();
+            using var dataStream = new MemoryStream();
+            await archivo.CopyToAsync(dataStream);
+            usuarioBd.Foto = dataStream.ToArray();
+        }
+
         try
         {
             await _context.SaveChangesAsync();

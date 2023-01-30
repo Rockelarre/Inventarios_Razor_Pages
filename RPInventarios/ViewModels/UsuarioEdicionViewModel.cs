@@ -26,4 +26,6 @@ public class UsuarioEdicionViewModel
     [Required(ErrorMessage = "El perfil del usuario es obligatorio.")]
     [Display(Name = "Perfil")]
     public int PerfilId { get; set; }
+
+    public byte[] Foto { get; set; }
 }

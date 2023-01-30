@@ -30,4 +30,6 @@ public class Usuario
     public int PerfilId { get; set; }
 
     public Perfil Perfil { get; set; }
+
+    public byte[] Foto { get; set; }
 }

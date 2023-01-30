@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RPInventarios.Data;
+using RPInventarios.Helpers;
 using RPInventarios.Models;
+using RPInventarios.ViewModels;
 
 namespace RPInventarios.Pages.Productos;
 
@@ -20,7 +22,7 @@ public class EditModel : PageModel
     }
 
     [BindProperty]
-    public Producto Producto { get; set; }
+    public ProductoCreacionEdicionViewModel Producto { get; set; }
     public SelectList Marcas { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int? id)
@@ -31,17 +33,32 @@ public class EditModel : PageModel
             return NotFound();
         }
 
-        Producto = await _context.Producto
+        var productoBd = await _context.Producto
                                     //.Include(p => p.Marca)
                                     .FirstOrDefaultAsync(m => m.Id == id);
 
-        if (Producto == null)
+        if (productoBd == null)
         {
             _servicioNotificacion.Warning($"No se ha encontrado el producto con el identificador proporcionado.");
             return NotFound();
         }
 
         Marcas = new SelectList(_context.Marca.AsNoTracking(), "Id", "Nombre");
+
+        Producto = new ProductoCreacionEdicionViewModel()
+        {
+            Id = productoBd.Id,
+            Costo = productoBd.Costo,
+            Descripcion = productoBd.Descripcion,
+            Estatus = productoBd.Estatus,
+            MarcaId = productoBd.MarcaId,
+            Nombre = productoBd.Nombre
+        };
+
+        if (!String.IsNullOrEmpty(productoBd.Imagen))
+        {
+            Producto.Imagen = await Utilerias.ConvertirImagenABytes(productoBd.Imagen);
+        }
 
         return Page();
     }
@@ -66,8 +83,19 @@ public class EditModel : PageModel
             return Page();
         }
 
+        var productoBd = await _context.Producto.FindAsync(Producto.Id);
 
-        _context.Attach(Producto).State = EntityState.Modified;
+        productoBd.Costo = Producto.Costo;
+        productoBd.Descripcion = Producto.Descripcion;
+        productoBd.Estatus = Producto.Estatus;
+        productoBd.MarcaId = Producto.MarcaId;
+        productoBd.Nombre = Producto.Nombre;
+
+        if (Request.Form.Files.Count > 0)
+        {
+            IFormFile archivo = Request.Form.Files.FirstOrDefault();
+            productoBd.Imagen = await Utilerias.LeerImagen(archivo);
+        }
 
         try
         {

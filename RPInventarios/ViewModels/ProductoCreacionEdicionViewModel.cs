@@ -1,10 +1,12 @@
-﻿using RPInventarios.Enums;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using RPInventarios.Enums;
+using RPInventarios.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RPInventarios.Models;
+namespace RPInventarios.ViewModels;
 
-public class Producto
+public class ProductoCreacionEdicionViewModel
 {
     public int Id { get; set; }
 
@@ -32,6 +34,5 @@ public class Producto
     public EstatusProducto Estatus { get; set; } = EstatusProducto.Activo;
 
     [Display(Name = "Imagen del producto")]
-    public string Imagen { get; set; }
+    public byte[] Imagen { get; set; }
 }
-

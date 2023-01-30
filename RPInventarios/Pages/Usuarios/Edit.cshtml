@@ -7,16 +7,17 @@
 
 <h4>@ViewData["Title"]</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
+<form method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6">
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Usuario.Id" />
             <div class="form-group">
                 <label asp-for="Usuario.Username" class="control-label"></label>
                 <input asp-for="Usuario.Username" class="form-control" readonly="readonly" />
                 <span asp-validation-for="Usuario.Username" class="text-danger"></span>
-            </div>           
+            </div>
             <div class="form-group mt-3">
                 <label asp-for="Usuario.PerfilId" class="control-label"></label>
                 <div class="input-group mb-3">
@@ -39,7 +40,7 @@
                 <label asp-for="Usuario.Apellidos" class="control-label"></label>
                 <input asp-for="Usuario.Apellidos" class="form-control" />
                 <span asp-validation-for="Usuario.Apellidos" class="text-danger"></span>
-            </div>            
+            </div>
             <div class="form-group">
                 <label asp-for="Usuario.CorreoElectronico" class="control-label"></label>
                 <input asp-for="Usuario.CorreoElectronico" class="form-control" />
@@ -49,17 +50,40 @@
                 <label asp-for="Usuario.Celular" class="control-label"></label>
                 <input asp-for="Usuario.Celular" class="form-control" />
                 <span asp-validation-for="Usuario.Celular" class="text-danger"></span>
-            </div>            
-             <div class="form-group mt-3">
+            </div>
+            <div class="form-group mt-3">
                 <partial name="Acciones/_Edit" />
             </div>
-        </form>
-    </div>
-</div>
 
+        </div>
+        @* Implementación Imágenes *@
+        <div class="col-md-6">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Usuario.Foto" style="w-100"></label>
+                @if (Model.Usuario.Foto != null)
+                {
+                        <img id="foto" style="width:350px;height:350px; object-fit:cover" src="data:image/*;base64,@(Convert.ToBase64String(Model.Usuario.Foto))">
+                }
+                else
+                {
+                        <img id="foto" style="width:350px;height:350px; object-fit:cover" src="">
+                }
+                <input type="file"
+                       accept=".png,.jpg,.jpeg,.gif,.tif"
+                       asp-for="Usuario.Foto"
+                       class="form-control"
+                       onchange="document.getElementById('foto').src = window.URL.createObjectURL(this.files[0])" />
+                <span asp-validation-for="Usuario.Foto" class="text-danger"></span>
+            </div>
+        </div>
+        @* Implementación Imágenes *@
+    </div>
+
+</form>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}
+    }

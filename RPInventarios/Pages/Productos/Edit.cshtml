@@ -8,9 +8,9 @@
 
 <h4>@ViewData["Title"]</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
+<form method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Producto.Id" />
             <div class="form-group mt-3">
@@ -20,7 +20,7 @@
             </div>
             <div class="form-group mt-3">
                 <label asp-for="Producto.Descripcion" class="control-label"></label>
-                <textarea asp-for="Producto.Descripcion" class="form-control" ></textarea>
+                <textarea asp-for="Producto.Descripcion" class="form-control"></textarea>
                 <span asp-validation-for="Producto.Descripcion" class="text-danger"></span>
             </div>
             <div class="form-group mt-3">
@@ -46,7 +46,7 @@
                     <label class="input-group-text" for="inputGroupSelect02">
                         <i class="fa-solid fa-book-open"></i>
                     </label>
-                    <select asp-for="Producto.Estatus" class="form-select" 
+                    <select asp-for="Producto.Estatus" class="form-select"
                             asp-items="Html.GetEnumSelectList<EstatusProducto>()">
                         <option value="">---Seleccionar Estatus---</option>
                     </select>
@@ -56,12 +56,33 @@
             <div class="form-group mt-3">
                 <partial name="Acciones/_Edit" />
             </div>
-        </form>
+        </div>
+        @* Implementación Imágenes *@
+        <div class="col-md-6">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Producto.Imagen" style="width: 100%;"></label>
+                @if (Model.Producto.Imagen != null)
+                {
+                        <img id="foto" class="img-fluid" src="data:image/*;base64,@(Convert.ToBase64String(Model.Producto.Imagen))">
+                }
+                else
+                {
+                        <img id="foto" class="img-fluid" src="">
+                }
+                <input type="file"
+                       accept=".png,.jpg,.jpeg,.gif,.tif"
+                       asp-for="Producto.Imagen"
+                       class="form-control"                       
+                       onchange="document.getElementById('foto').src = window.URL.createObjectURL(this.files[0])" />
+                <span asp-validation-for="Producto.Imagen" class="text-danger"></span>
+            </div>
+        </div>
+        @* Implementación Imágenes *@
     </div>
-</div>
-
+</form>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}
+    }

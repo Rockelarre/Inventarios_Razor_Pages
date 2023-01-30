@@ -4,12 +4,12 @@
 @{
     ViewData["Title"] = "Crear Usuario";
 }
-
 <h4>@ViewData["Title"]</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
+<form method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6">
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group mt-3">
                 <label asp-for="Usuario.PerfilId" class="control-label"></label>
@@ -61,14 +61,38 @@
             <div class="form-group mt-3">
                 <partial name="Acciones/_Create" />
             </div>
-        </form>
+        </div>
+        @* Implementación Imágenes *@
+        <div class="col-md-6">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Usuario.Foto" style="width: 100%;"></label>
+                @if (Model.Usuario.Foto != null)
+                {
+                        <img id="foto" style="width:350px;height:350px; object-fit:cover" src="data:image/*;base64,@(Convert.ToBase64String(Model.Usuario.Foto))">
+                }
+                else
+                {
+                        <img id="foto" style="width:350px;height:350px; object-fit:cover" src="">
+                }
+                <input type="file"
+                       accept=".png,.jpg,.jpeg,.gif,.tif"
+                       asp-for="Usuario.Foto"
+                       class="form-control"                       
+                       onchange="document.getElementById('foto').src = window.URL.createObjectURL(this.files[0])" />
+                <span asp-validation-for="Usuario.Foto" class="text-danger"></span>
+            </div>
+        </div>
+        @* Implementación Imágenes *@
     </div>
-</div>
+</form>
 <span class="fa-solid fa-spinner fa-5x spinner" id="ajax-loader"></span>
 @section Scripts {
-    <script src="~/js/app.js"></script>
+        <script src="~/js/app.js"></script>
         <script src="~/js/servicios-ajax.js"></script>
-            <script src="~/js/servicio-datos.js"></script>
-                <script src="~/js/crearusuariovm.js"></script>
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+        <script src="~/js/servicio-datos.js"></script>
+        <script src="~/js/crearusuariovm.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
