@@ -31,3 +31,8 @@ https://www.udemy.com/course/razor-pages-la-guia-inicial/
     - Uso de clase PasswordHasher para encriptación de la contraseña de usuario.
     - Uso de clase UsuarioFactoria para reducir la complejidad del código escrito en la clase PageModel
     - Validación del Username con Ajax
+    - Autenticación
+    - Autorización
+    - Páginas personalizadas para Login y Logout-
+    - Página de acceso denegado
+    - Políticas de Autorización
