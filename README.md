@@ -36,3 +36,6 @@ https://www.udemy.com/course/razor-pages-la-guia-inicial/
     - Páginas personalizadas para Login y Logout-
     - Página de acceso denegado
     - Políticas de Autorización
+    - Carga de foto en formato binario
+    - Guarda de una imágen en un directorio de la aplicación
+    - Vista previa de las vistas
